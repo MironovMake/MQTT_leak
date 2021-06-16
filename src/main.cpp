@@ -3,13 +3,13 @@
 #include <PubSubClient.h>
 #include <EEPROM.h>
 // REPLACE WITH YOUR NETWORK CREDENTIALS
-const char *ssid = "Beeline_2G_F22959";
-const char *pass = "dUNFcUEP";
+const char *ssid = "*****"; // wifi name
+const char *pass = "*****"; // wifi password
 
 const char *mqtt_server = "mqtt.by";    // Имя сервера MQTT
 const int mqtt_port = 1883;             // Порт для подключения к серверу MQTT
-const char *mqtt_user = "Aleks2312323"; // Логин от сервер
-const char *mqtt_pass = "oh85jjoe";     // Пароль от сервера
+const char *mqtt_user = "***********";       // your login
+const char *mqtt_pass = "***********";       // your password
 
 int transistorLeak = 12; // transistor for turn ON leak sensor
 int transistorPow = 15;  // transistor for conect power with A0 pin
@@ -53,7 +53,6 @@ void MQTT_Sending()
       client.publish("/leak", String(alarm));
       client.publish("/EnergyLeak", String(PowerValueNow));
       client.publish("/Before", String(PowerValueBefore));
-      SendFlag = 0;
     }
   }
 }
@@ -141,8 +140,8 @@ void setup()
     MQTT_Sending();
     MQTT_Sending();
     delay(150);
+    WiFi.disconnect();
   }
-  WiFi.disconnect();
   ESP.deepSleep(15e6);
 }
 
